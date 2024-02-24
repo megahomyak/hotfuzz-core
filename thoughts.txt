@@ -71,7 +71,7 @@ So, like, we have Fuzz. Fuzz is a HashMap, but there's also a way to query the h
 
 So Fuzz is merely a way to query that HashMap.
 
-And so there's Hot, which is also a way to query the HashMap and also a restriction. Now, it looks through every element and finds those for which their Hot chars match the input string, maybe there'll be an exact match, maybe only prefixed matches, it's not certain, but there's also a restriction: it should be impossible to insert a new entry if it has its sequence of Hot characters to be a subsequence or a supersequence of any other map entry (so, like, "s1 not in s2 && s2 not in s1")
+And so there's Hot, which is also a way to query the HashMap and also a restriction. Now, it looks through every element and finds those for which their Hot chars match the input string, maybe there'll be an exact match, maybe only prefixed matches, it's not certain, but there's also a restriction: it should be impossible to insert a new entry if it has its sequence of Hot characters to be a subsequence or a supersequence of any other map entry (so, like, "!s1.startswith(s2) && !s2.startswith(s1)")
 
 Removal: you can't remove a string if it's not there. For example, if a "he[l]lo" is in the map, it can't be removed by a "[l]emon", it has to be exactly "he[l]lo"
 
