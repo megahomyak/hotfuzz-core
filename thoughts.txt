@@ -1,0 +1,85 @@
+heLLo world
+helLo worLd
+
+=> same hot, different fuzz => hot collision
+
+hello world
+hello world
+
+=> no hot, same fuzz => fuzz collision
+
+hello world
+helo world
+
+=> no hot, different fuzz => normal insertion
+
+helLo world
+hEllo world
+
+=> hot, different fuzz => normal insertion
+
+----------
+
+Insertion:
+
+he[l]lo world
+hello wor[l]d
+
+- same hot, same fuzz => fuzz collision
+
+he[l]lo neighbor
+hello wor[l]d
+
+- same hot, different fuzz => fuzz collision
+
+he[l]lo world
+[h]ello world
+
+- same fuzz, different hot => hot collision
+
+he[l]lo neighbor
+[h]ello world
+
+- different fuzz, different hot => correct insertion
+
+Removal:
+
+he[l]lo world
+hello wor[l]d
+
+- same hot, same fuzz => fuzz collision
+
+he[l]lo neighbor
+hello wor[l]d
+
+- same hot, different fuzz => fuzz collision
+
+he[l]lo world
+[h]ello world
+
+- same fuzz, different hot => hot collision
+
+he[l]lo neighbor
+[h]ello world
+
+- different fuzz, different hot => correct insertion
+
+================================================================
+
+Insertion (and general explanations):
+So, like, we have Fuzz. Fuzz is a HashMap, but there's also a way to query the hashmap by going through its every item, and there's also an insertion error when there's a collision (disregarding Char variation).
+
+So Fuzz is merely a way to query that HashMap.
+
+And so there's Hot, which is also a way to query the HashMap and also a restriction. Now, it looks through every element and finds those for which their Hot chars match the input string, maybe there'll be an exact match, maybe only prefixed matches, it's not certain, but there's also a restriction: it should be impossible to insert a new entry if it has its sequence of Hot characters to be a subsequence or a supersequence of any other map entry (so, like, "s1 not in s2 && s2 not in s1")
+
+Removal: you can't remove a string if it's not there. For example, if a "he[l]lo" is in the map, it can't be removed by a "[l]emon", it has to be exactly "he[l]lo"
+
+Getting: since it's HotFuzz, there are three ways of getting an entry:
+* Using a key, like with a hashmap
+* Using Fuzz
+* Using Hot
+, which are not modifying the internal structure in any way (not adding anything, not removing anything, not rearranging anything), so I shouldn't worry about that
+
+Iteration:
+Just go over the entries of the HashMap, nothing too complicated
