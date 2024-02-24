@@ -83,3 +83,7 @@ Getting: since it's HotFuzz, there are three ways of getting an entry:
 
 Iteration:
 Just go over the entries of the HashMap, nothing too complicated
+
+--------------
+
+Decided not to do plain `get` and `get_mut` since it will require me to have a separate data struuuuuunevermind I will have it anyway for iteration. Or not? No, I can say that iteration is just like if we queried Fuzz with an empty string, it will match literally everything then... Or will it? *Vsauce music starts playing* If I say that a "Fuzz" match is a match containing all the Fuzz characters in the same order (although they can have gaps in them), will an empty prompt match since it has no Fuzz characters? I probably should just limit people from doing it altogether on type level. Although... Maybe, if we're talking UIs, it will be better to show all the elements, so I should probably just do *that*
