@@ -8,7 +8,7 @@ pub struct HotFuzz<T> {
 
 impl<T> HotFuzz<T> {
     pub fn fuzz_get(&self, prompt: NonEmptyStr) -> Option<Vec<(&Name, &T)>> {
-        self.fuzz.get(prompt)
+
     }
 
     pub fn fuzz_get_mut(&mut self, prompt: NonEmptyStr) -> Option<Vec<(&Name, &mut T)>> {

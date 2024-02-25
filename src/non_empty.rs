@@ -1,41 +1,21 @@
-pub struct Grapheme<'a>(&'a str);
-pub struct Graphemes<'a>(&'a str);
-pub struct GraphemesIterator<'a> {
-
-}
-
-fn graphemes(s: &str) -> unicode_segmentation::Graphemes {
-    use unicode_segmentation::UnicodeSegmentation;
-
-    s.graphemes(true) // Extended graphemes, not legacy graphemes
-}
-
-impl<'a> Grapheme<'a> {
-    pub fn content(&self) -> &'a str {
-        &self.0
-    }
-}
-
-impl<'a> Graphemes<'a> {
-    pub fn content(&self) -> unicode_segmentation::Graphemes {
-        graphemes(&self.0)
-    }
-}
+use crate::{Grapheme, graphemes::GraphemeIter};
 
 pub struct NonEmptyStr<'a> {
-    pub first: Grapheme<'a>,
-    pub rest: Graphemes<'a>,
+    pub first: Grapheme,
+    pub rest: &'a str,
 }
 
-pub enum CreationError {}
+pub enum CreationError {
+    CollectionIsEmpty,
+}
 
 impl<'a> NonEmptyStr<'a> {
-    pub fn new(s: &'a str) {
-        let mut graphemes = graphemes(s);
-
-        let first = graphemes.next();
-        let rest = graphemes.as_str();
-
-        Self { first, rest }
+    pub fn new(s: &str) -> Result<Self, CreationError> {
+        let mut graphemes = GraphemeIter::new(s);
+        if let Some(first) = graphemes.next() {
+            Ok(Self { first, rest: graphemes.as_str() })
+        } else {
+            Err(CreationError::CollectionIsEmpty)
+        }
     }
 }

@@ -1,8 +1,8 @@
 pub mod char;
 
-use char::Char;
+use char::NameGrapheme;
 
 #[derive(Clone, Debug, Hash, PartialEq, Eq, PartialOrd, Ord)]
 pub struct Name {
-    pub chars: Vec<Char>,
+    pub chars: Vec<NameGrapheme>,
 }

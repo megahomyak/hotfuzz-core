@@ -1,3 +1,14 @@
+##################################################
+#                                                #
+#                   WARNING                      #
+#                                                #
+# This text document is here only to document my #
+# own thoughts in arbitrary order, sometimes     #
+# unfinished. If you want to understand HotFuzz, #
+# you better look at the official documentation. #
+#                                                #
+##################################################
+
 heLLo world
 helLo worLd
 

@@ -1,10 +1,13 @@
 pub mod fuzz;
 pub mod hot;
+pub mod non_empty;
 mod name;
 mod hotfuzz;
-mod non_empty;
+pub mod graphemes;
+mod r#box;
 
 pub use hotfuzz::HotFuzz;
 pub use name::Name;
-pub use name::char::Char;
-pub use non_empty::NonEmptyStr;
+pub use name::char::NameGrapheme;
+pub use non_empty::NonEmpty;
+pub use graphemes::Grapheme;

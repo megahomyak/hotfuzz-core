@@ -1,10 +1,12 @@
+use crate::Grapheme;
+
 #[derive(Clone, Copy, Debug, Hash, PartialEq, Eq, PartialOrd, Ord)]
-pub enum Char {
-    Hot(char),
-    Regular(char),
+pub enum NameGrapheme {
+    Hot(Grapheme),
+    Regular(Grapheme),
 }
 
-impl Char {
+impl NameGrapheme {
     pub fn hot(&self) -> Option<char> {
         match self {
             Self::Regular(c) => None,
