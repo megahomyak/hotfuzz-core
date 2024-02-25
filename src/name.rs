@@ -1,8 +1,20 @@
 use crate::Grapheme;
 
-#[derive(Clone, Debug, Hash, PartialEq, Eq, PartialOrd, Ord)]
-pub struct Name {
-    pub chars: Vec<NameGrapheme>,
+pub trait Name {
+    type Iter<'a>: Iterator<Item = NameGrapheme> + 'a;
+
+    fn graphemes<'a>(&'a self) -> Self::Iter<'a>;
+}
+
+impl<T> Name for T
+where
+    for<'a> &'a T: IntoIterator<Item = NameGrapheme>,
+{
+    type Iter<'a> = <&'a T as IntoIterator>::IntoIter;
+
+    fn graphemes<'a>(&'a self) -> Self::Iter<'a> {
+        self.into_iter()
+    }
 }
 
 #[derive(Clone, Copy, Debug, Hash, PartialEq, Eq, PartialOrd, Ord)]
