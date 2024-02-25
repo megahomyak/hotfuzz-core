@@ -1,3 +1,3 @@
-mod iter;
+mod iters;
 
-pub use iter::Iter;
+pub use iters::{Iter, IterMut};

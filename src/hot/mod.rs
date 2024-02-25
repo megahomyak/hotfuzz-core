@@ -1,15 +1,13 @@
-mod iter;
-mod iter_mut;
-pub use iter::Iter;
-pub use iter_mut::IterMut;
+mod iters;
+pub use iters::{Iter, IterMut};
 
 use std::collections::HashMap;
 
-use crate::{Name, Grapheme, r#box::BoxPtr};
+use crate::{r#box::BoxPtr, Grapheme, Name};
 
-pub enum HotResult<T> {
+pub enum HotResult<T, Iter> {
     Exact(T),
-    Prefixed(Iter<T>),
+    Prefixed(Iter),
 }
 
 pub(self) enum Node<T> {
@@ -22,7 +20,5 @@ pub(crate) struct Hot<T> {
 }
 
 impl<T> Hot<T> {
-    pub fn get(&self, prompt: impl Iterator<Item = Grapheme>) -> HotResult<> {
-
-    }
+    pub fn get(&self, prompt: impl Iterator<Item = Grapheme>) -> HotResult<T, Iter<T>> {}
 }

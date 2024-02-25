@@ -1,5 +1,10 @@
 use crate::Grapheme;
 
+#[derive(Clone, Debug, Hash, PartialEq, Eq, PartialOrd, Ord)]
+pub struct Name {
+    pub chars: Vec<NameGrapheme>,
+}
+
 #[derive(Clone, Copy, Debug, Hash, PartialEq, Eq, PartialOrd, Ord)]
 pub enum NameGrapheme {
     Hot(Grapheme),
