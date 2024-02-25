@@ -8,3 +8,4 @@ edition = "2021"
 [dependencies]
 dumbfuzz = "1.0.0"
 preftree = "0.1.0"
+unicode-segmentation = { version = "1.11.0", features = ["no_std"] }

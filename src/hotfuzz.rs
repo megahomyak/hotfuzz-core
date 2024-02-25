@@ -1,18 +1,17 @@
-use std::rc::Rc;
+use std::collections::HashMap;
 
-use crate::{hot::{Hot, HotResult}, fuzz::Fuzz, name::Name, char::Char};
+use crate::{name::Name, NonEmpty, non_empty::NonEmptyStr};
 
 pub struct HotFuzz<T> {
-    hot: Hot<Rc<T>>,
-    fuzz: Fuzz<Rc<T>>,
+    items: HashMap<Name, T>,
 }
 
 impl<T> HotFuzz<T> {
-    pub fn fuzz_get(&self, prompt: &str) -> Option<Vec<(&Name, &T)>> {
+    pub fn fuzz_get(&self, prompt: NonEmptyStr) -> Option<Vec<(&Name, &T)>> {
         self.fuzz.get(prompt)
     }
 
-    pub fn fuzz_get_mut(&mut self, prompt: &str) -> Option<Vec<(&Name, &mut T)>> {
+    pub fn fuzz_get_mut(&mut self, prompt: NonEmptyStr) -> Option<Vec<(&Name, &mut T)>> {
         self.fuzz.get_mut(prompt)
     }
 

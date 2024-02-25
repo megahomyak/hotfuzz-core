@@ -1,8 +1,10 @@
-mod char;
-mod fuzz;
-mod hot;
+pub mod fuzz;
+pub mod hot;
 mod name;
-mod iters;
 mod hotfuzz;
-mod hot_prefixed_entries_iterator;
-mod fuzz_results_iterator;
+mod non_empty;
+
+pub use hotfuzz::HotFuzz;
+pub use name::Name;
+pub use name::char::Char;
+pub use non_empty::NonEmptyStr;
