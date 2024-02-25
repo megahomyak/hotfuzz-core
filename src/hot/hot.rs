@@ -2,23 +2,18 @@ use std::{collections::HashMap, rc::Rc};
 
 use crate::name::Name;
 
+enum Node<T> {
+    Occupied((Rc<Name>, Rc<T>)),
+    Free(HashMap<char, Node<T>>),
+}
+
 pub(crate) struct Hot<T> {
-    subtrees: HashMap<char, Hot<T>>,
-    value: Option<(Rc<Name>, Rc<T>)>,
+    root: Node<T>,
 }
 
 pub(crate) enum HotResult<T> {
     Exact(T),
-    Prefixed(Vec<T>),
-}
-
-impl<T> Default for Hot<T> {
-    fn default() -> Self {
-        Self {
-            subtrees: HashMap::new(),
-            value: None,
-        }
-    }
+    Prefixed(crate::hot_prefixed_entries_iterator::HotPrefixedEntriesIterator<T>),
 }
 
 pub(crate) enum InsertionError {
@@ -31,14 +26,20 @@ impl<T> Hot<T> {
 
     }
 
-    pub fn get_mut(&self, prompt: &str) -> Option<HotResult<(&Name, &mut T)>> {}
+    pub fn get_mut(&self, prompt: &str) -> Option<HotResult<(&Name, &mut T)>> {
+
+    }
+
+    pub fn remove(&self, name: &Name) -> Option<(&Name, Rc<T>)> {
+
+    }
 
     pub fn insert(
-        &self,
+        &mut self,
         name: Rc<Name>,
         value: Rc<T>,
     ) -> Result<Option<(Rc<Name>, Rc<T>)>, InsertionError> {
-        let mut current_node = self;
+        let mut current_node = &mut self.root;
         let hot_chars = name.chars.iter().filter_map(|char| char.hot());
         for char in hot_chars {
             if current_node.value.is_some() {

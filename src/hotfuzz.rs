@@ -28,7 +28,7 @@ impl<T> HotFuzz<T> {
 
     pub fn remove(&mut self, name: &Name, value: T) -> Option<(Name, T)> {}
 
-    pub fn iter(&self) -> iters::Iter<T> {}
+    pub fn iter(&self) -> crate::iters::Iter<T> {}
 
-    pub fn iter_mut(&mut self) -> iters::IterMut<T> {}
+    pub fn iter_mut(&mut self) -> crate::iters::IterMut<T> {}
 }
